@@ -83,37 +83,7 @@ def addAuthor(request):
             return redirect("index")
     return render(request, "addauthor.html", {"form": form})
 
-# def addReply(request):
 
-#     form = ReplyForm(request.POST or None)
-#     if request.method == "POST":
-#         if form.is_valid():
-#             reply = form.save(commit=False)
-#             reply.user = request.user
-#             reply.save()
-
-#             return redirect("index")
-#     return render(request, "detail.html", {"form": form})
-
-
-# def upAuthor(request):
-
-#     if request.method == 'POST':
-#         form = UpAuthorForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             handle_uploaded_file(request.FILES['profile_pic'])
-#             return redirect("index")
-#     return render(request, "updateauthor.html", {"form": form})
-
-# def upAuthor(request):
-
-#     if request.method == 'POST':
-#         form = UpAuthorForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             instance = ModelWithFileField(file_field=request.FILES['profile_pic'])
-#             instance.save()
-#             return redirect("index")
-#     return render(request, "updateauthor.html", {"form": form})
 @login_required(login_url="user:login")
 def deletePost(request,slug):
     post = get_object_or_404(Post,slug = slug)
@@ -144,19 +114,6 @@ def profile(request, slug):
     if request.user.is_authenticated:
         author = Author.objects.get(user=request.user)
     
-    # if "comment-form" in request.POST:
-    #     comment = request.POST.get("comment")
-    #     new_comment, created = Comment.objects.get_or_create(user=author, content=comment)
-    #     post.comments.add(new_comment.id)
-
-    # if "reply-form" in request.POST:
-    #     reply = request.POST.get("reply")
-    #     commenr_id = request.POST.get("comment-id")
-    #     comment_obj = Comment.objects.get(id=commenr_id)
-    #     new_reply, created = Reply.objects.get_or_create(user=author, content=reply)
-    #     comment_obj.replies.add(new_reply.id)
-
-
     context = {
         "fullname":fullname,
 
